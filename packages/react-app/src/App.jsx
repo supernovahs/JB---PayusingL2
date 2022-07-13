@@ -27,7 +27,6 @@ import {
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
-import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
@@ -143,7 +142,7 @@ function App(props) {
 
   // const contractConfig = useContractConfig();
 
-  const contractConfig = { deployedContracts: deployedContracts || {}, externalContracts: externalContracts || {} };
+  // const contractConfig = { deployedContracts: deployedContracts || {}, externalContracts: externalContracts || {} };
 
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
