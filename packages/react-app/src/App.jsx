@@ -241,14 +241,20 @@ function App(props) {
       loadWeb3Modal();
     }
   }, [loadWeb3Modal]);
-
   const selectNetworkOptions = [];
   for (const id in NETWORKS) {
-    selectNetworkOptions.push(
-      <Select.Option key={id} value={NETWORKS[id].name}>
-        <span style={{ color: NETWORKS[id].color }}>{NETWORKS[id].name}</span>
-      </Select.Option>,
-    );
+    let L2 = [100, 137, 10, 42161];
+    for (let i = 0; i < L2.length; i++) {
+      if (NETWORKS[id].chainId === L2[i]) {
+        console.log("Networks chain id ", NETWORKS[id].chainId);
+
+        selectNetworkOptions.push(
+          <Select.Option key={id} value={NETWORKS[id].name}>
+            <span style={{ color: NETWORKS[id].color }}>{NETWORKS[id].name}</span>
+          </Select.Option>,
+        );
+      }
+    }
   }
 
   const networkSelect = (
@@ -323,7 +329,14 @@ function App(props) {
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+          <Home
+            yourLocalBalance={yourLocalBalance}
+            readContracts={readContracts}
+            targetNetwork={targetNetwork}
+            userSigner={userSigner}
+            address={address}
+            price={price}
+          />
         </Route>
         <Route exact path="/debug">
           {/*
